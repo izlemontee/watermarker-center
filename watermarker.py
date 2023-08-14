@@ -1,18 +1,18 @@
 import os 
 path = 'D:/Pictures/watermarking' #set the path
 os.chdir(path) #change cwd
-from PIL import Image
+from PIL import Image #import image library
 
-watermark = 'watermark_transparency.png'
+watermark = 'watermark_transparency.png' #the watermark of your choice, MAKE SURE IT'S IN THE WORKING DIRECTORY
 
-logoIm = Image.open(watermark)
+logoIm = Image.open(watermark) #use the watermark picture as logoIm
 logoWidth, logoHeight = logoIm.size
 os.makedirs('withLogo',exist_ok = True) #creates a withLogo folder to store the finished images with logos, True keyword to keep os.makedirs() from raising an exception if withLogo exists
 
 #loop over all files in the working directory
 for filename in os.listdir('.'): #if it's os.listdir('.') it returns a list of the files in the cwd
     if not (filename.endswith('.png') or filename.endswith('.jpg') or filename.endswith('.PNG'))\
-        or filename == watermark:
+        or filename == watermark: #skip if it's the watermark
         continue #skip non-image files and the logo file itself
     im = Image.open(filename)
     width,height = im.size
